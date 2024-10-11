@@ -17,9 +17,8 @@ function ProfilePage() {
     if (isUserChangePhoto) {
       // eslint-disable-next-line no-undef
       Swal.fire({
-        position: "top-end",
         icon: "success",
-        title: "Berhasil mengubah photo profile!",
+        title: "Berhasil mengubah foto profil!",
         showConfirmButton: false,
         timer: 1200,
       });

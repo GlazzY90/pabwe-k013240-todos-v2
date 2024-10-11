@@ -35,7 +35,7 @@ function UserDetail({ authLogin, onUserChangePhoto }) {
                 <h3 className="text-primary">{authLogin.name}</h3>
 
                 <button
-                  className="btn btn-sm btn-outlineprimary"
+                  className="btn btn-sm btn-outline-primary"
                   onClick={handleUploadClick}
                 >
                   <FaUpload /> Ubah Photo Profile

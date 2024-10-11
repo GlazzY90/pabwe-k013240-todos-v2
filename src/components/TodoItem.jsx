@@ -23,10 +23,12 @@ function TodoItem({ todo, onDeleteTodo }) {
                 {todo.title}
               </Link>
             </h5>
+
             <div>
               <span className={badgeStatus}>{badgeLabel}</span>
             </div>
           </div>
+
           <div className="col-4 text-end">
             <button
               type="button"

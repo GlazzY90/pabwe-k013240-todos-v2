@@ -7,6 +7,7 @@ const ActionType = {
   ADD_TODO: "ADD_TODO",
   DELETE_TODO: "DELETE_TODO",
   DETAIL_TODO: "DETAIL_TODO",
+  EDIT_TODO: "EDIT_TODO",
 };
 
 function getTodosActionCreator(todos) {
@@ -36,12 +37,43 @@ function deleteTodoActionCreator(status) {
   };
 }
 
+function editTodoActionCreator(status) {
+  return {
+    type: ActionType.EDIT_TODO,
+    payload: {
+      todo,
+    },
+  };
+}
+
 function detailTodoActionCreator(todo) {
   return {
     type: ActionType.DETAIL_TODO,
     payload: {
       todo,
     },
+  };
+}
+
+function changeCoverTodoActionCreator(todo) {
+  return {
+    type: ActionType.DETAIL_TODO,
+    payload: {
+      todo,
+    },
+  };
+}
+
+function asyncChangeCoverTodo({ id, cover }) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      const updatedTodo = await api.postChangeCoverTodo({ id, cover });
+      dispatch(changeCoverTodoActionCreator(updatedTodo));
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
   };
 }
 
@@ -84,6 +116,22 @@ function asyncDeleteTodo(id) {
   };
 }
 
+function asyncEditTodo(id, title, description, is_finished) {
+  return async (dispatch) => {
+    dispatch(showLoading());
+    try {
+      await api.putUpdateTodo({ id, title, description, is_finished });
+
+      const updatedTodo = await api.getDetailTodo(id);
+
+      dispatch(detailTodoActionCreator(updatedTodo));
+    } catch (error) {
+      showErrorDialog(error.message);
+    }
+    dispatch(hideLoading());
+  };
+}
+
 function asyncDetailTodo(id) {
   return async (dispatch) => {
     dispatch(showLoading());
@@ -105,6 +153,10 @@ export {
   asyncAddTodo,
   deleteTodoActionCreator,
   asyncDeleteTodo,
+  editTodoActionCreator,
+  asyncEditTodo,
   detailTodoActionCreator,
   asyncDetailTodo,
+  changeCoverTodoActionCreator,
+  asyncChangeCoverTodo,
 };

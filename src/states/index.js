@@ -8,6 +8,7 @@ import {
   todosReducer,
   isAddTodoReducer,
   isDeleteTodoReducer,
+  isEditTodoReducer,
   detailTodoReducer,
 } from "./todos/reducer";
 
@@ -26,6 +27,7 @@ const store = configureStore({
     todos: todosReducer,
     isAddTodo: isAddTodoReducer,
     isDeleteTodo: isDeleteTodoReducer,
+    isEditTodo: isEditTodoReducer,
     detailTodo: detailTodoReducer,
   },
 });

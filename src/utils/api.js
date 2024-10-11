@@ -125,7 +125,10 @@ const api = (() => {
     }
     return message;
   }
+
   async function putUpdateTodo({ id, title, description, is_finished }) {
+    console.log("Updating todo:", { id, title, description, is_finished });
+
     const response = await _fetchWithAuth(`${BASE_URL}/todos/${id}`, {
       method: "PUT",
       headers: {
@@ -137,15 +140,16 @@ const api = (() => {
         is_finished,
       }),
     });
+
     const responseJson = await response.json();
+    console.log("API response:", responseJson); // Log the entire API response
+
     const { success, message } = responseJson;
     if (success !== true) {
-      throw new Error(message);
+      throw new Error(message); // Handle error message if success is false
     }
-    const {
-      data: { todo_id },
-    } = responseJson;
-    return todo_id;
+
+    return message;
   }
 
   async function deleteTodo(id) {

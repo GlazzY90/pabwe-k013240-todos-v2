@@ -14,11 +14,11 @@ function HomePage() {
   const is_finished = queryParams.get("is_finished") || "";
 
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (isDeleteTodo) {
       // eslint-disable-next-line no-undef
       Swal.fire({
-        position: "top-end",
         icon: "success",
         title: "Todo berhasil dihapus!",
         showConfirmButton: false,
@@ -28,6 +28,7 @@ function HomePage() {
     }
     dispatch(asyncGetTodos(is_finished));
   }, [dispatch, isDeleteTodo, is_finished]);
+
   const onDeleteTodo = (id) => {
     dispatch(asyncDeleteTodo(id));
   };
